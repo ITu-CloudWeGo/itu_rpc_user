@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "user_service";
+
+service UserService {
+  rpc Sign(SignRequest) returns (SignResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+}
+
+message Response {
+  int64 status = 1;
+  string msg = 2;
+}
+
+message SignRequest {
+  string email = 1;
+  string username = 2;
+  string password = 3;
+  string nickname = 4;
+  string icon = 5;
+}
+
+message SignResponse {
+  Response response = 1;
+  string email = 2;
+  string username = 3;
+  string nickname = 4;
+  string icon = 5;
+}
+
+message LoginRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message LoginResponse {
+  Response response = 1;
+  string email = 2;
+  string username = 3;
+  string nickname = 4;
+  string icon = 5;
+}
+
+message GetUserRequest {
+  uint64 uid = 1;
+  string username = 2;
+}
+
+message GetUserResponse {
+  Response response = 1;
+  string username = 2;
+  string nickname = 3;
+  string icon = 4;
+}
+
+message UpdateUserRequest {
+  uint64 uid = 1;
+  string new_email = 2;
+  string new_nickname = 3;
+  string new_icon = 4;
+  string password = 5;
+  string new_password = 6;
+  string confirmPasswd = 7;
+}
+
+message UpdateUserResponse {
+  Response response = 1;
+  string username = 2;
+  string email = 3;
+  string nickname = 4;
+  string icon = 5;
+}
