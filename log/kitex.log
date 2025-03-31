@@ -1,0 +1,73 @@
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T18:46:55+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebcf41e304 for etcd registry","time":"2025-03-31T18:46:56+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:05:55+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebcf41e32e for etcd registry","time":"2025-03-31T19:05:56+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:06:54+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebcf41e334 for etcd registry","time":"2025-03-31T19:06:55+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:11:14+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebcf41e341 for etcd registry","time":"2025-03-31T19:11:15+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:21:39+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebcf41e34e for etcd registry","time":"2025-03-31T19:21:40+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:27:21+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebcf41e354 for etcd registry","time":"2025-03-31T19:27:22+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:28:40+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebcf41e35a for etcd registry","time":"2025-03-31T19:28:41+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:34:34+08:00"}
+{"level":"error","msg":"KITEX: received error and exit: error=context deadline exceeded","time":"2025-03-31T19:34:38+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:34:51+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebfb79f304 for etcd registry","time":"2025-03-31T19:34:52+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:36:49+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebfb79f30c for etcd registry","time":"2025-03-31T19:36:50+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:53:09+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebfb79f33e for etcd registry","time":"2025-03-31T19:53:10+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T19:53:53+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ebfb79f345 for etcd registry","time":"2025-03-31T19:53:54+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T20:30:57+08:00"}
+{"level":"error","msg":"KITEX: received error and exit: error=context deadline exceeded","time":"2025-03-31T20:31:01+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T20:31:48+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf2504 for etcd registry","time":"2025-03-31T20:31:49+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T20:32:57+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf250a for etcd registry","time":"2025-03-31T20:32:58+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:8888","time":"2025-03-31T20:34:31+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf2511 for etcd registry","time":"2025-03-31T20:34:32+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:39:56+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf251f for etcd registry","time":"2025-03-31T20:39:57+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:40:08+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf2524 for etcd registry","time":"2025-03-31T20:40:09+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:40:45+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf252b for etcd registry","time":"2025-03-31T20:40:46+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:41:26+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf2533 for etcd registry","time":"2025-03-31T20:41:27+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:41:39+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf2538 for etcd registry","time":"2025-03-31T20:41:40+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:41:54+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf253d for etcd registry","time":"2025-03-31T20:41:55+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:47:41+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf2554 for etcd registry","time":"2025-03-31T20:47:42+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:48:01+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf2558 for etcd registry","time":"2025-03-31T20:48:02+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:48:34+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf255c for etcd registry","time":"2025-03-31T20:48:35+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:49:07+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf2562 for etcd registry","time":"2025-03-31T20:49:08+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:50:17+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf256a for etcd registry","time":"2025-03-31T20:50:18+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:50:31+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:50:37+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf256f for etcd registry","time":"2025-03-31T20:50:38+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:51:21+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf2576 for etcd registry","time":"2025-03-31T20:51:22+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:52:10+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf257b for etcd registry","time":"2025-03-31T20:52:11+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:52:31+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf257f for etcd registry","time":"2025-03-31T20:52:32+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:53:18+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf2585 for etcd registry","time":"2025-03-31T20:53:19+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:53:34+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf258a for etcd registry","time":"2025-03-31T20:53:35+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T20:53:49+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf258e for etcd registry","time":"2025-03-31T20:53:50+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T21:00:56+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf259a for etcd registry","time":"2025-03-31T21:00:57+08:00"}
+{"level":"info","msg":"KITEX: server listen at addr=[::]:9000","time":"2025-03-31T21:04:04+08:00"}
+{"level":"info","msg":"start keepalive lease 694d95ec2faf259f for etcd registry","time":"2025-03-31T21:04:05+08:00"}

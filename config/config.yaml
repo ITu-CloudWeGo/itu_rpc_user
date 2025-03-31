@@ -1,6 +1,6 @@
 Kitex:
   Service: "user_service"
-  Address: "0.0.0.0:8888"
+  Address: "0.0.0.0:9000"
   LogLevel: info
   LogFileName: "log/kitex.log"
   LogMaxSize: 10

@@ -14,36 +14,14 @@ import (
 	"time"
 )
 
-//func main() {
-//	conf := config.GetConfig()
-//
-//	r, err := etcd.NewEtcdRegistry(conf.Registry.RegistryAddress,
-//		etcd.WithDialTimeoutOpt(10*time.Second),
-//	)
-//	if err != nil {
-//		log.Fatalf("初始化 Etcd 注册中心失败: %v", err)
-//	}
-//
-//	svr := user_service.NewServer(
-//		new(UserServiceImpl),
-//		server.WithRegistry(r),
-//		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{
-//			ServiceName: "user",
-//		}),
-//	)
-//
-//	if err := svr.Run(); err != nil {
-//		log.Fatalf("服务器启动失败: %v", err)
-//	}
-//}
-
 func main() {
 	opts := kitexInit()
 
 	svr := user_service.NewServer(new(UserServiceImpl), opts...)
 	err := svr.Run()
 	if err != nil {
-		klog.Error(err.Error())
+		klog.Error("Failed to run server:", err.Error())
+		panic(err)
 	}
 
 }
@@ -53,7 +31,12 @@ func kitexInit() (opts []server.Option) {
 	// address
 	addr, err := net.ResolveTCPAddr("tcp", conf.Kitex.Address)
 	if err != nil {
+		klog.Error("Failed to resolve TCP address:", err.Error())
 		panic(err)
+	}
+	if addr == nil {
+		klog.Error("Invalid TCP address")
+		panic("Invalid TCP address")
 	}
 	opts = append(opts, server.WithServiceAddr(addr))
 
@@ -64,6 +47,7 @@ func kitexInit() (opts []server.Option) {
 	// registry_etcd
 	r, err := etcdRegistry.NewEtcdRegistry(conf.Registry.RegistryAddress)
 	if err != nil {
+		klog.Error("Failed to create ETCD registry:", err.Error())
 		panic(err)
 	}
 	opts = append(opts, server.WithRegistry(r))
@@ -83,7 +67,9 @@ func kitexInit() (opts []server.Option) {
 	}
 	klog.SetOutput(asyncWriter)
 	server.RegisterShutdownHook(func() {
-		asyncWriter.Sync()
+		if err := asyncWriter.Sync(); err != nil {
+			klog.Error("Failed to sync log writer:", err.Error())
+		}
 	})
 
 	return
