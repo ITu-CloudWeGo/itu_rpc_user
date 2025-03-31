@@ -443,7 +443,7 @@ ReadFieldError:
 }
 
 func (x *UpdateUserRequest) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Uid, offset, err = fastpb.ReadUint64(buf, _type)
+	x.Uid, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -848,7 +848,7 @@ func (x *UpdateUserRequest) fastWriteField1(buf []byte) (offset int) {
 	if x.Uid == 0 {
 		return offset
 	}
-	offset += fastpb.WriteUint64(buf[offset:], 1, x.GetUid())
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetUid())
 	return offset
 }
 
@@ -1253,7 +1253,7 @@ func (x *UpdateUserRequest) sizeField1() (n int) {
 	if x.Uid == 0 {
 		return n
 	}
-	n += fastpb.SizeUint64(1, x.GetUid())
+	n += fastpb.SizeInt64(1, x.GetUid())
 	return n
 }
 

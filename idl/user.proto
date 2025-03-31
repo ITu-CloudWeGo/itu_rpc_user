@@ -59,7 +59,7 @@ message GetUserResponse {
 }
 
 message UpdateUserRequest {
-  uint64 uid = 1;
+  int64 uid = 1;
   string new_email = 2;
   string new_nickname = 3;
   string new_icon = 4;

@@ -22,7 +22,7 @@ type UserDaoImpl struct {
 
 type UserDao interface {
 	Insert(data *model.User) error
-	FindOne(Uid uint64) (*model.User, error)
+	FindOne(Uid int64) (*model.User, error)
 	FindByEmail(email string) (*model.User, error)
 	FindByUserName(userName string) (*model.User, error)
 	Update(user *model.User) error
@@ -82,7 +82,7 @@ func (dao *UserDaoImpl) Insert(data *model.User) error {
 	return dao.db.Create(data).Error
 }
 
-func (dao *UserDaoImpl) FindOne(uid uint64) (*model.User, error) {
+func (dao *UserDaoImpl) FindOne(uid int64) (*model.User, error) {
 	q := &model.User{
 		Uid: uid,
 	}
