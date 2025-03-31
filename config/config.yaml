@@ -1,18 +1,28 @@
+Kitex:
+  Service: "tags_service"
+  Address: "0.0.0.0:8888"
+  LogLevel: info
+  LogFileName: "log/kitex.log"
+  LogMaxSize: 10
+  LogMaxAge: 3
+  LogMaxBackups: 50
+
 Redis:
-  address: "127.0.0.1:6379"
-  username: ""
-  password: ""
-  db: 0
+  Address: "127.0.0.1:6379"
+  Username: ""
+  Password: ""
+  DB: 0
 
 Registry:
-  registry_address: 127.0.0.1:2379
-  username: ""
-  password: ""
+  RegistryAddress:
+  - 127.0.0.1:2379
+  Username: ""
+  Password: ""
 
 PostgresSQL:
-  host: 127.0.0.1
-  user: postgres
-  password: postgres
-  dbname: postgres
-  port: 5432
-  sslmode: disable
+  Host: 127.0.0.1
+  User: postgres
+  Password: postgres
+  Dbname: postgres
+  Port: 5432
+  Sslmode: disable
