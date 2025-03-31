@@ -47,7 +47,7 @@ message LoginResponse {
 }
 
 message GetUserRequest {
-  uint64 uid = 1;
+  int64 uid = 1;
   string username = 2;
 }
 
