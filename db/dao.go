@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/ITu-CloudWeGo/itu_rpc_user/config"
-	module "github.com/ITu-CloudWeGo/itu_rpc_user/db/user_module"
+	"github.com/ITu-CloudWeGo/itu_rpc_user/db/model"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/driver/postgres"
@@ -21,11 +21,11 @@ type UserDaoImpl struct {
 }
 
 type UserDao interface {
-	Insert(data *module.User) error
-	FindOne(Uid uint64) (*module.User, error)
-	FindByEmail(email string) (*module.User, error)
-	FindByUserName(userName string) (*module.User, error)
-	Update(user *module.User) error
+	Insert(data *model.User) error
+	FindOne(Uid uint64) (*model.User, error)
+	FindByEmail(email string) (*model.User, error)
+	FindByUserName(userName string) (*model.User, error)
+	Update(user *model.User) error
 	Cache() *redis.Client
 }
 
@@ -53,7 +53,7 @@ func initUserDao(dsn string, redisOpt *redis.Options) {
 		panic(fmt.Sprintf("failed to connect database: %v", err))
 	}
 	cache := redis.NewClient(redisOpt)
-	err = db.AutoMigrate(&module.User{})
+	err = db.AutoMigrate(&model.User{})
 	if err != nil {
 		panic(err)
 	}
@@ -69,21 +69,24 @@ func GetUserDao() UserDao {
 		conf := config.GetConfig()
 		dsn := postDsn()
 		initUserDao(dsn, &redis.Options{
-			Addr: conf.Redis.Host,
+			Addr:     conf.Redis.Address,
+			Username: conf.Redis.Username,
+			Password: conf.Redis.Password,
+			DB:       conf.Redis.DB,
 		})
 	})
 	return instanceUserDao
 }
 
-func (dao *UserDaoImpl) Insert(data *module.User) error {
+func (dao *UserDaoImpl) Insert(data *model.User) error {
 	return dao.db.Create(data).Error
 }
 
-func (dao *UserDaoImpl) FindOne(uid uint64) (*module.User, error) {
-	q := &module.User{
+func (dao *UserDaoImpl) FindOne(uid uint64) (*model.User, error) {
+	q := &model.User{
 		Uid: uid,
 	}
-	var redisResult module.User
+	var redisResult model.User
 	err := dao.cache.Get(context.Background(), q.GetCacheKey()).Scan(redisResult)
 	if err == nil {
 		return &redisResult, nil
@@ -95,12 +98,12 @@ func (dao *UserDaoImpl) FindOne(uid uint64) (*module.User, error) {
 	return q, nil
 }
 
-func (dao *UserDaoImpl) FindByEmail(email string) (*module.User, error) {
+func (dao *UserDaoImpl) FindByEmail(email string) (*model.User, error) {
 	// 尝试从 Redis 缓存中获取用户信息
 	cacheKey := fmt.Sprintf("users:email:%s", email)
 	val, err := dao.cache.Get(context.Background(), cacheKey).Result()
 	if err == nil {
-		var cachedUser module.User
+		var cachedUser model.User
 		err := json.Unmarshal([]byte(val), &cachedUser)
 		if err != nil {
 			klog.Error("用户信息反序列化失败，Email:", email, " 错误信息:", err)
@@ -114,7 +117,7 @@ func (dao *UserDaoImpl) FindByEmail(email string) (*module.User, error) {
 	}
 
 	// 如果缓存中没有，从数据库中查询
-	var user module.User
+	var user model.User
 	err = dao.db.Where("email = ?", email).First(&user).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -139,12 +142,12 @@ func (dao *UserDaoImpl) FindByEmail(email string) (*module.User, error) {
 	return &user, nil
 }
 
-func (dao *UserDaoImpl) FindByUserName(userName string) (*module.User, error) {
+func (dao *UserDaoImpl) FindByUserName(userName string) (*model.User, error) {
 	// 尝试从 Redis 缓存中获取用户信息
 	cacheKey := fmt.Sprintf("users:user_name:%s", userName)
 	val, err := dao.cache.Get(context.Background(), cacheKey).Result()
 	if err == nil {
-		var cachedUser module.User
+		var cachedUser model.User
 		err := json.Unmarshal([]byte(val), &cachedUser)
 		if err != nil {
 			klog.Error("用户信息反序列化失败，UserName:", userName, " 错误信息:", err)
@@ -158,7 +161,7 @@ func (dao *UserDaoImpl) FindByUserName(userName string) (*module.User, error) {
 	}
 
 	// 如果缓存中没有，从数据库中查询
-	var user module.User
+	var user model.User
 	err = dao.db.Where("user_name = ?", userName).First(&user).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -183,7 +186,7 @@ func (dao *UserDaoImpl) FindByUserName(userName string) (*module.User, error) {
 	return &user, nil
 }
 
-func (dao *UserDaoImpl) Update(user *module.User) error {
+func (dao *UserDaoImpl) Update(user *model.User) error {
 	err := dao.db.Save(user).Error
 	if err != nil {
 		return err
