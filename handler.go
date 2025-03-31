@@ -5,7 +5,7 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	dao "github.com/ITu-CloudWeGo/itu_rpc_user/db"
-	module "github.com/ITu-CloudWeGo/itu_rpc_user/db/user_module"
+	module "github.com/ITu-CloudWeGo/itu_rpc_user/db/model"
 	user_service "github.com/ITu-CloudWeGo/itu_rpc_user/kitex_gen/user_service"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"golang.org/x/crypto/bcrypt"
