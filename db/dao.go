@@ -5,14 +5,15 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"sync"
+	"time"
+
 	"github.com/ITu-CloudWeGo/itu_rpc_user/config"
 	"github.com/ITu-CloudWeGo/itu_rpc_user/db/model"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"sync"
-	"time"
 )
 
 type UserDaoImpl struct {
@@ -27,6 +28,7 @@ type UserDao interface {
 	FindByUserName(userName string) (*model.User, error)
 	Update(user *model.User) error
 	Cache() *redis.Client
+	FindUid(username string) (int64, error)
 }
 
 var (
@@ -209,3 +211,46 @@ func (dao *UserDaoImpl) Update(user *model.User) error {
 }
 
 func (dao *UserDaoImpl) Cache() *redis.Client { return dao.cache }
+
+func (dao *UserDaoImpl) FindUid(username string) (int64, error) {
+	var user model.User
+	cacheKey := fmt.Sprintf("users:user_name:%s", username)
+
+	// 尝试从 Redis 缓存中获取用户信息
+	val, err := dao.cache.Get(context.Background(), cacheKey).Result()
+	if err == nil {
+		err := json.Unmarshal([]byte(val), &user)
+		if err != nil {
+			klog.Error("用户信息反序列化失败，UserName:", username, " 错误信息:", err)
+			return 0, fmt.Errorf("用户信息反序列化失败: %v", err)
+		}
+		return user.Uid, nil
+	}
+	if err != redis.Nil {
+		klog.Error("Redis 查询失败:", err)
+		return 0, err
+	}
+
+	err = dao.db.Where("user_name = ?", username).Select("uid").First(&user).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return 0, nil // 用户不存在，返回 0, nil
+		}
+		klog.Error("数据库查询失败:", err)
+		return 0, err // 其他错误，返回具体错误信息
+	}
+
+	// 将查询到的用户信息存入 Redis 缓存
+	userJSON, err := json.Marshal(user)
+	if err != nil {
+		klog.Error("用户信息序列化失败，UserName:", username, " 错误信息:", err)
+		return 0, fmt.Errorf("用户信息序列化失败: %v", err)
+	}
+
+	err = dao.cache.Set(context.Background(), cacheKey, userJSON, time.Hour).Err()
+	if err != nil {
+		klog.Error("设置 Redis 缓存失败:", err)
+	}
+
+	return user.Uid, nil
+}

@@ -1,8 +1,14 @@
 package main
+package main
+package main
 
 import (
+	"net"
+	"time"
+
 	"github.com/ITu-CloudWeGo/itu_rpc_user/config"
 	user_service "github.com/ITu-CloudWeGo/itu_rpc_user/kitex_gen/user_service/userservice"
+	kafka "github.com/ITu-CloudWeGo/itu_rpc_user/utils"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
@@ -10,12 +16,11 @@ import (
 	etcdRegistry "github.com/kitex-contrib/registry-etcd"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
-	"net"
-	"time"
 )
 
 func main() {
 	opts := kitexInit()
+	go kafka.StartKafkaConsumer()
 
 	svr := user_service.NewServer(new(UserServiceImpl), opts...)
 	err := svr.Run()

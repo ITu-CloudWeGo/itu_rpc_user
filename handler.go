@@ -4,12 +4,14 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/base64"
+	"time"
+
 	dao "github.com/ITu-CloudWeGo/itu_rpc_user/db"
 	module "github.com/ITu-CloudWeGo/itu_rpc_user/db/model"
 	user_service "github.com/ITu-CloudWeGo/itu_rpc_user/kitex_gen/user_service"
+	kafka "github.com/ITu-CloudWeGo/itu_rpc_user/utils"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"golang.org/x/crypto/bcrypt"
-	"time"
 )
 
 // UserServiceImpl implements the last service interface defined in the IDL.
@@ -73,6 +75,17 @@ func (s *UserServiceImpl) Sign(ctx context.Context, req *user_service.SignReques
 			},
 		}, nil
 	}
+	getUid , err := userDao.FindUid(req.Username)
+	if err := kafka.PublishUID(getUid); err != nil {
+		klog.Error("用户注册失败:", err)
+		return &user_service.SignResponse{
+			Response: &user_service.Response{
+				Status: 403,
+				Msg:    "注册失败，请稍后重试",
+			},
+		}, nil
+	}
+
 	klog.Info("用户注册成功:", data)
 	return &user_service.SignResponse{
 		Response: &user_service.Response{
