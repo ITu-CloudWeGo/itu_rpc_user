@@ -1,6 +1,6 @@
 Kitex:
   Service: "user_service"
-  Address: "0.0.0.0:9000"
+  Address: "127.0.0.1:5480"
   LogLevel: info
   LogFileName: "log/kitex.log"
   LogMaxSize: 10
@@ -22,7 +22,7 @@ Registry:
 PostgresSQL:
   Host: 127.0.0.1
   User: postgres
-  Password: postgres
+  Password: 123456
   Dbname: postgres
   Port: 5432
   Sslmode: disable

@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/ITu-CloudWeGo/itu_rpc_user/config"
-	user_service "github.com/ITu-CloudWeGo/itu_rpc_user/kitex_gen/user_service/userservice"
+	"github.com/ITu-CloudWeGo/itu_rpc_user/kitex_gen/user_service/userservice"
 	"github.com/cloudwego/kitex/pkg/klog"
 	"github.com/cloudwego/kitex/pkg/rpcinfo"
 	"github.com/cloudwego/kitex/server"
@@ -17,7 +17,7 @@ import (
 func main() {
 	opts := kitexInit()
 
-	svr := user_service.NewServer(new(UserServiceImpl), opts...)
+	svr := userservice.NewServer(new(UserServiceImpl), opts...)
 	err := svr.Run()
 	if err != nil {
 		klog.Error("Failed to run server:", err.Error())
@@ -74,3 +74,16 @@ func kitexInit() (opts []server.Option) {
 
 	return
 }
+
+//func main() {
+//	r, err := etcd.NewEtcdRegistry([]string{"127.0.0.1:2379"}) // r should not be reused.
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//	user := userservice.NewServer(new(UserServiceImpl), server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: "user_service"}), server.WithRegistry(r))
+//
+//	err = user.Run()
+//	if err != nil {
+//		log.Fatal(err)
+//	}
+//}
